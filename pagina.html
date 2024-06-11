@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Assistant:wght@400;700&display=swap');
+
+        .tonic-cd-style-1 {
+            max-width: 500px;
+            display: flex;
+            flex-direction: row;
+            gap: 10px;
+            font-family: 'Assistant', sans-serif;
+        }
+
+        .tonic-cd-style-1 div {
+            display: flex;
+            flex-direction: column;
+            flex: 1 1 0px;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: #ffffff;
+            padding: 10px;
+            border-radius: 5px;
+            height: 80px;
+            min-height: 70px;
+            margin: 0;
+        }
+
+        .tonic-cd-style-1 strong {
+            color: #000000;
+            font-size: 45px;
+        }
+
+        .tonic-cd-style-1 span {
+            color: #333333;
+            font-size: 18px;
+        }
+
+        .tonic-cd-style-1 .tonic-cd-end {
+            text-align: center;
+            font-weight: bold;
+            color: #333333 !important;
+            font-size: 25px !important;
+        }
+
+        .event-started {
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+            color: #FF0000;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="tonic-cd-countdown-6107 tonic-cd-style-1">
+        <div class="tonic-cd-days-6107"></div>
+        <div class="tonic-cd-hours-6107"></div>
+        <div class="tonic-cd-minutes-6107"></div>
+        <div class="tonic-cd-seconds-6107"></div>
+    </div>
+    <div class="event-started" style="display: none;">O evento começou</div>
+
+    <script>
+        const targetDate = "2024-05-16 00:00:00";
+        const countdownSec = document.getElementsByClassName("tonic-cd-countdown-6107")[0];
+        const timerDays = document.getElementsByClassName("tonic-cd-days-6107");
+        const timerHours = document.getElementsByClassName("tonic-cd-hours-6107");
+        const timerMinutes = document.getElementsByClassName("tonic-cd-minutes-6107");
+        const timerSeconds = document.getElementsByClassName("tonic-cd-seconds-6107");
+        const eventStartedMessage = document.querySelector(".event-started");
+
+        const dateTime = new Date(targetDate);
+        const yyyy = dateTime.getFullYear();
+        const mm = String(dateTime.getMonth() + 1).padStart(2, "0");
+        const dd = String(dateTime.getDate()).padStart(2, "0");
+        const hour = String(dateTime.getHours()).padStart(2, "0");
+        const min = String(dateTime.getMinutes()).padStart(2, "0");
+        const sec = String(dateTime.getSeconds()).padStart(2, "0");
+
+        const endDate = yyyy + "-" + mm + "-" + dd;
+        const endTime = hour + ":" + min + ":" + sec;
+        const endTimezone = "+00:00";
+
+        const end = new Date(`${endDate}T${endTime}${endTimezone}`).getTime();
+
+        const seconds = 1000;
+        const minutes = seconds * 60;
+        const hours = minutes * 60;
+        const days = hours * 24;
+        const x = setInterval(function() {
+            let now = new Date().getTime();
+            const difference = end - now;
+
+            if (difference < 0) {
+                clearInterval(x);
+                Array.from(timerDays).forEach(
+                    (dayEl) =>
+                    (dayEl.innerHTML =
+                        "<strong>0</strong><span>Days</span>")
+                );
+                Array.from(timerHours).forEach(
+                    (hoursEl) =>
+                    (hoursEl.innerHTML =
+                        "<strong>0</strong><span>Hours</span>")
+                );
+                Array.from(timerMinutes).forEach(
+                    (minutesEl) =>
+                    (minutesEl.innerHTML =
+                        "<strong>0</strong><span>Minutes</span>")
+                );
+                Array.from(timerSeconds).forEach(
+                    (secondsEl) =>
+                    (secondsEl.innerHTML =
+                        "<strong>0</strong><span>Seconds</span>")
+                );
+                eventStartedMessage.style.display = "block";
+                return;
+            }
+
+            Array.from(timerDays).forEach(
+                (dayEl) =>
+                (dayEl.innerHTML =
+                    "<strong>" + Math.floor(difference / days) + "</strong><span>Days</span>")
+            );
+            Array.from(timerHours).forEach(
+                (hoursEl) =>
+                (hoursEl.innerHTML =
+                    "<strong>" + Math.floor((difference % days) / hours) + "</strong><span>Hours</span>")
+            );
+            Array.from(timerMinutes).forEach(
+                (minutesEl) =>
+                (minutesEl.innerHTML =
+                    "<strong>" + Math.floor((difference % hours) / minutes) +
+                    "</strong><span>Minutes</span>")
+            );
+            Array.from(timerSeconds).forEach(
+                (secondsEl) =>
+                (secondsEl.innerHTML =
+                    "<strong>" + Math.floor((difference % minutes) / seconds) +
+                    "</strong><span>Seconds</span>")
+            );
+        }, seconds);
+    </script>
+</body>
+</html>
