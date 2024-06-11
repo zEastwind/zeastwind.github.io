@@ -7,18 +7,29 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Assistant:wght@400;700&display=swap');
 
+        html, body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+
         .tonic-cd-style-1 {
-            max-width: 500px;
             display: flex;
             flex-direction: row;
             gap: 10px;
             font-family: 'Assistant', sans-serif;
+            background: #ffffff;
+            padding: 10px;
+            border-radius: 5px;
         }
 
         .tonic-cd-style-1 div {
             display: flex;
             flex-direction: column;
-            flex: 1 1 0px;
             align-items: center;
             justify-content: center;
             text-align: center;
@@ -53,6 +64,7 @@
             font-weight: bold;
             color: #FF0000;
             margin-top: 20px;
+            display: none;
         }
     </style>
 </head>
@@ -63,7 +75,7 @@
         <div class="tonic-cd-minutes-6107"></div>
         <div class="tonic-cd-seconds-6107"></div>
     </div>
-    <div class="event-started" style="display: none;">O evento começou</div>
+    <div class="event-started">O evento começou</div>
 
     <script>
         const targetDate = "2024-09-16 00:00:00";
